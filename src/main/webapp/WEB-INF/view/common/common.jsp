@@ -12,3 +12,4 @@
 <script type="text/javascript" src="<%=basePath%>/asserts/js/jquery-1.12.4.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/asserts/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>/asserts/layer/layer.js"></script>
+<script type="text/javascript" src="<%=basePath%>/asserts/js/common.js"></script>

@@ -10,12 +10,12 @@
   					<span class="input-group-addon">
   						<span class="glyphicon glyphicon-search"></span>
   					</span>
-  					<input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+  					<input type="text" class="form-control" placeholder="Username" >
 				</div>
 			</li>
 			<c:forEach items="${tables}" var="table">
 		  		<li class="list-group-item">
-		  			<a href="right.html?tableName=${table}" target="db-content">${table}</a>
+		  			<a href="javascript:void;" data-request-url="${basePath}/right.html?tableName=${table}" data-asyn-load="true" target="#table-info">${table}</a>
 		  		</li>
 			</c:forEach>
 		</c:if>
