@@ -1,0 +1,39 @@
+.left{
+background-color: rgb(238,238,238);
+overflow-y: scroll;
+}
+.aside-menu{
+padding: 60px 0px;
+list-style: none;
+clear:both;
+}
+.aside-menu .search-box{
+width:90%;
+margin: auto auto 10px auto;
+}
+.aside-menu .list-item{
+}
+.aside-menu .list-item a{
+display: block;
+padding: 6px 25px;
+font-size: 16px;
+color:gray;
+}
+.aside-menu .list-item a:hover {
+	color: #4cae4c;
+	font-size: 18px;
+}
+
+.aside-menu .list-item-high {
+background-color: #e3e3e3;
+}
+.aside-menu .list-item-high span{
+	font-size:14px;
+	color: #f8ac53;
+}
+
+.right{
+overflow-x:hidden;
+overflow-y:auto;
+padding-top:52px;
+}

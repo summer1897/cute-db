@@ -11,13 +11,12 @@
 	<div>
 		<jsp:include page="common/header.jsp"/>
 	</div>
-	<div class="container-fluid" style="margin:0px;padding:0px;">
-		<div class="row" style="padding:0px;margin:0px;">
-			<div class="col-md-3">
-				<iframe src="common/left.html" frameborder="0" width="100%" height="630" style="margin-left:0px;"></iframe>
+	<div class="container margin-clear padding-clear">
+		<div class="row margin-clear padding-clear">
+			<div class="col-md-3 left padding-clear" id="table-list">
+				<jsp:include page="./common/left.jsp"/>
 			</div>
-			<div class="col-md-9" style="">
-				<iframe src="common/right.html?tableName=" name="db-content" frameborder="0" style="width:100%;min-height:630px;s"></iframe>
+			<div class="col-md-9 right" id="table-info">
 			</div>
 		</div>
 	</div>
