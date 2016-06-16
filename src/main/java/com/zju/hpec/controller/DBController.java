@@ -18,14 +18,15 @@ public class DBController {
 	private IDBTableService dbTableService;
 	
 	@RequestMapping(value={"/","/index","index.html","index.htm"})
-	public String common(){
+	public String index(Model model){
+		List<String> tables = dbTableService.getTables();
+		model.addAttribute("tables", tables);
 		return "index";
 	}
 	
 	@RequestMapping("common/left.html")
 	public String dbCatalog(Model model){
-		List<String> tables = dbTableService.getTables();
-		model.addAttribute("tables", tables);
+
 		return "common/left";
 	}
 	
