@@ -10,7 +10,7 @@
   					<span class="input-group-addon">
   						<span class="glyphicon glyphicon-search"></span>
   					</span>
-  					<input type="text" class="form-control" placeholder="Username" >
+  					<input type="text" class="form-control" placeholder="please input table name" name="tableName" >
 				</div>
 			</li>
 			<c:forEach items="${tables}" var="table">
