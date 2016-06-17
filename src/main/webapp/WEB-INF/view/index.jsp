@@ -11,7 +11,7 @@
 	<div>
 		<jsp:include page="common/header.jsp"/>
 	</div>
-	<div class="container margin-clear padding-clear">
+	<div class="container margin-clear padding-clear width-all">
 		<div class="row margin-clear padding-clear">
 			<div class="col-md-3 left padding-clear" id="table-list">
 				<jsp:include page="./common/left.jsp"/>

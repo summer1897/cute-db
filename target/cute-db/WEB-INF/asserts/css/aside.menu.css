@@ -33,7 +33,7 @@ background-color: #e3e3e3;
 }
 
 .right{
-overflow-x:hidden;
+overflow-x:scroll;
 overflow-y:auto;
-padding-top:52px;
+padding-top:60px;
 }

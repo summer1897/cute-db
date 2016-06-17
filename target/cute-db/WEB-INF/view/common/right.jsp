@@ -16,7 +16,10 @@
 	<!-- /btn-group -->
 	<input type="text" class="form-control" aria-label="...">
 	<span class="input-group-btn">
-        <button class="btn btn-default" type="button">Go!</button>
+        <button class="btn btn-success" type="button">
+			<span class="glyphicon glyphicon-search"></span>
+			Go
+		</button>
     </span>
 </div>
 <!-- /input-group -->

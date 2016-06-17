@@ -33,7 +33,9 @@ public class DBController {
 	@RequestMapping("/common/right.html")
 	public String dbRecords(@RequestParam String tableName,Model model){
 		String returnPath = "common/right";
-		
+
+		System.out.println("returnPath: "+returnPath);
+
 		if(null == tableName || "".equals(tableName))
 			return returnPath;
 		
