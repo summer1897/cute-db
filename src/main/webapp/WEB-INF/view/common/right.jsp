@@ -28,7 +28,7 @@
 		<thead>
 			<tr>
 				<c:forEach items="${records.get(0).getFields()}" var="field">
-					<td>${field.getFieldName()}</td>
+					<td align="center">${field.getFieldName()}</td>
 				</c:forEach>
 			</tr>
 		</thead>
@@ -36,7 +36,7 @@
 			<c:forEach items="${records}" var="record">
 				<tr>
 					<c:forEach items="${record.getFields()}" var="field">
-						<td>${field.getValue() }</td>
+						<td align="center">${field.getValue()}</td>
 					</c:forEach>
 				</tr>
 			</c:forEach>

@@ -32,4 +32,19 @@ public interface IDBTableService {
 	 * @return 返回tableName数据表中所有数据纪录
 	 */
 	public List<DBRecord> getAllRecords(String tableName);
+
+	/**
+	 * 查询数据库中表名包含tableName的所有表,并返回符合条件的所有表名
+	 * @param tableName 表名
+	 * @return 返回符合条件的所有数据表名
+	 */
+	public List<String> queryTablesMatchesName(String tableName);
+
+	/**
+	 * 查询数据库--dbName中表名包含tableName的所有表,并返回符合条件的所有表名
+	 * @param dbName 数据库
+	 * @param tableName 表名
+	 * @return 返回符合条件的所有数据表名
+	 */
+	public List<String> queryTablesMatchesName(String dbName,String tableName);
 }

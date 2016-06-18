@@ -1,12 +1,10 @@
 package com.zju.hpec.utils;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 import com.zju.hpec.admin.domain.DBSource;
 import com.zju.hpec.consts.DBType;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -22,6 +20,8 @@ public class DBUtils{
 	private static final String DB_NAME = "dbName";
 	private static final String USE_UNICODE = "unicode";
 	private static final String CHARSET = "charset";
+
+	public static final String DEFAULT_CHARSET = "UTF-8";
 	
 	public static String resolveUrl(DBSource dbSource){
 		return DBType.getUrl(dbSource.getDbType())
@@ -30,6 +30,32 @@ public class DBUtils{
 				.replace(DB_NAME, dbSource.getDbName())
 				.replace(USE_UNICODE, new Boolean(dbSource.isUseUnicode()).toString())
 				.replace(CHARSET, dbSource.getCharset());
+	}
+
+	public static Connection getConnection(JdbcTemplate jdbcTemplate) {
+
+		if(null == jdbcTemplate)
+			return null;
+
+		try {
+			return jdbcTemplate.getDataSource().getConnection();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public static DatabaseMetaData getDatabaseMetaDat(JdbcTemplate jdbcTemplate){
+		if(null == jdbcTemplate)
+			return null;
+		try {
+			return jdbcTemplate.getDataSource()
+                               .getConnection()
+                               .getMetaData();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public static void close(Connection con,Statement statement,ResultSet rs){
