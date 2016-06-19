@@ -42,4 +42,8 @@ public class DBTableServiceImpl implements IDBTableService {
 		return dbTableDao.queryTablesMatchesName(dbName,tableName);
 	}
 
+	public String getTableCreateInfo(String tableName) {
+		return dbTableDao.getTableCreateInfo(tableName);
+	}
+
 }

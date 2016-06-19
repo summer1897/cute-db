@@ -47,4 +47,11 @@ public interface IDBTableService {
 	 * @return 返回符合条件的所有数据表名
 	 */
 	public List<String> queryTablesMatchesName(String dbName,String tableName);
+
+	/**
+	 * 获取表创建信息
+	 * @param tableName 表名
+	 * @return String
+	 */
+	public String getTableCreateInfo(String tableName);
 }

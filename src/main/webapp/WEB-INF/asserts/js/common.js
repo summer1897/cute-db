@@ -1,7 +1,9 @@
+
 /**
  * Created by summer on 16/6/15.
  */
 $(function() {
+
     /**
      * 判断元素是否为空
      * @param data
@@ -63,12 +65,10 @@ $(function() {
         return target;
     }
 
-   //通用异步加载处理
-    $("a[data-asyn-load='true']").click(function(){
-        //获取请求参数
+    $(document).on('click',"a[data-asyn-load='true']",function(){
         var paramStr = resolveParams($(this).attr("data-params"));
         var requestURL  = $(this).attr("data-request-url") + paramStr;
-         // alert(requestURL);
+        // alert(requestURL);
         //alert(normalizeTarget($(this).attr("target")));
         $(normalizeTarget($(this).attr("target"))).load(requestURL);
     });

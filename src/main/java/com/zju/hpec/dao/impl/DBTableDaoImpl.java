@@ -1,15 +1,15 @@
 package com.zju.hpec.dao.impl;
 
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zju.hpec.utils.Sqls;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.stereotype.Repository;
 
 import com.zju.hpec.dao.IDBTableDao;
@@ -98,6 +98,24 @@ public class DBTableDaoImpl implements IDBTableDao {
 			DBUtils.close(null,null,rs);
 		}
 		return tables;
+	}
+
+	public String getTableCreateInfo(String tableName) {
+		String tableInfo = "";
+		final String sql = Sqls.SHOW_CREATE_TABLE + tableName;
+		tableInfo = jdbcTemplate.execute(new StatementCallback<String>() {
+			public String doInStatement(Statement statement) throws SQLException, DataAccessException {
+				StringBuilder result = new StringBuilder("");
+				ResultSet rs = statement.executeQuery(sql);
+
+				while(rs.next()){
+					if(null != rs.getObject(2))
+						result.append(rs.getObject(2).toString());
+				}
+				return result.toString();
+			}
+		});
+		return tableInfo;
 	}
 
 }
