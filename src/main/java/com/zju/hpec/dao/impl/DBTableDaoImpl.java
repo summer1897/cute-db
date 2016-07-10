@@ -1,16 +1,15 @@
 package com.zju.hpec.dao.impl;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.zju.hpec.controller.Sqls;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.stereotype.Repository;
 
 import com.zju.hpec.dao.IDBTableDao;
@@ -39,19 +38,18 @@ public class DBTableDaoImpl implements IDBTableDao {
 
 	public List<String> getTablesOfDb(String dbname) {
 		List<String> tables = new ArrayList<String>();
-		Connection con = null;
 		DatabaseMetaData metaData = null;
+		ResultSet rs = null;
 		try {
-			con = jdbcTemplate.getDataSource().getConnection();
-			metaData = con.getMetaData();
-			ResultSet rs = metaData.getTables(dbname, null, null, null);
+			metaData = DBUtils.getDatabaseMetaDat(jdbcTemplate);
+			 rs = metaData.getTables(dbname, null, null, null);
 			while(rs.next()){
 				tables.add(rs.getString(TABLE_NAME));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
-			DBUtils.close(con, null, null);
+		}finally {
+			DBUtils.close(null,null,rs);
 		}
 		return tables;
 	}
@@ -67,8 +65,8 @@ public class DBTableDaoImpl implements IDBTableDao {
 				List<DBField> fields = new ArrayList<DBField>();
 				ResultSetMetaData metaData = rs.getMetaData();
 				for(int i = 1; i <= metaData.getColumnCount(); ++i){
-					System.out.println("metaData: "+metaData);
-					System.out.println("field value: "+rs.getObject(i));
+//					System.out.println("metaData: "+metaData);
+//					System.out.println("field value: "+rs.getObject(i));
 					DBField field = new DBField(metaData.getColumnLabel(i),rs.getObject(i));
 					fields.add(field);
 				}
@@ -77,6 +75,47 @@ public class DBTableDaoImpl implements IDBTableDao {
 			
 		});
 		return records;
+	}
+
+	public List<String> queryTablesMatchesName(String tableName) {
+		return queryTablesMatchesName(null,tableName);
+	}
+
+	public List<String> queryTablesMatchesName(String dbName, String tableName) {
+		List<String> tables = new ArrayList<String>();
+
+		DatabaseMetaData metaData = null;
+		ResultSet rs = null;
+		try{
+			metaData = DBUtils.getDatabaseMetaDat(jdbcTemplate);
+			rs = metaData.getTables(dbName,null,tableName,null);
+			while(rs.next()){
+				tables.add(rs.getString(TABLE_NAME));
+			}
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			DBUtils.close(null,null,rs);
+		}
+		return tables;
+	}
+
+	public String getTableCreateInfo(String tableName) {
+		String tableInfo = "";
+		final String sql = Sqls.SHOW_CREATE_TABLE + tableName;
+		tableInfo = jdbcTemplate.execute(new StatementCallback<String>() {
+			public String doInStatement(Statement statement) throws SQLException, DataAccessException {
+				StringBuilder result = new StringBuilder("");
+				ResultSet rs = statement.executeQuery(sql);
+
+				while(rs.next()){
+					if(null != rs.getObject(2))
+						result.append(rs.getObject(2).toString());
+				}
+				return result.toString();
+			}
+		});
+		return tableInfo;
 	}
 
 }
