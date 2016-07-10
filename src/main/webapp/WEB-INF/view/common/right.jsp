@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="./common.jsp" />
 <style type="text/css">
-	.table-info-style{
+	.table-info-style {
 		padding: 10px;
 		background-color: #5FB878;
 	}
@@ -28,7 +28,7 @@
 					html += "</div>";
 					//$(".table-info-style").html(html);
 					layer.open({
-						//area : ['500px','500px'],
+						//area : ['600px','800px'],
 						type: 1,
 						shade: false,
 						title: false, //不显示标题

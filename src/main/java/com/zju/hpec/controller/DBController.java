@@ -55,9 +55,14 @@ public class DBController {
 	@RequestMapping(value = "/common/queryTablesMatchesName.html",method = RequestMethod.GET)
 	public void queryTablesMatchesName(@RequestParam String tableName,
 									   HttpServletResponse response){
-		List<String> tables = dbTableService.queryTablesMatchesName("%"+tableName+"%");
+		List<String> tables = null;
 		System.out.println("tableName: "+tableName);
 		try {
+			if(null == tableName || "".equals(tableName)) {
+				tables = dbTableService.getTables();
+			}else {
+				tables = dbTableService.queryTablesMatchesName("%" + tableName + "%");
+			}
 			response.getOutputStream().write(JSON.toJSONString(tables).getBytes(DBUtils.DEFAULT_CHARSET));
 		} catch (IOException e) {
 			e.printStackTrace();

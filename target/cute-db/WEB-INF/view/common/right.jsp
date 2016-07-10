@@ -28,7 +28,7 @@
 					html += "</div>";
 					//$(".table-info-style").html(html);
 					layer.open({
-						//area : ['500px','500px'],
+						//area : ['600px','800px'],
 						type: 1,
 						shade: false,
 						title: false, //不显示标题

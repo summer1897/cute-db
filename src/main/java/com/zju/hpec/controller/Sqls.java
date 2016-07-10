@@ -1,4 +1,4 @@
-package com.zju.hpec.utils;
+package com.zju.hpec.controller;
 
 /**
  * Created by summer on 16/6/19.
