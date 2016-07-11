@@ -2,65 +2,41 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <jsp:include page="./common.jsp" />
+<script type="text/javascript" charset="utf-8" src="${basePath}/asserts/js/right.js"></script>
 <style type="text/css">
+	.layui-layer-content{
+		min-width: 500px;
+		max-width: 600px;
+		max-height: 700px;
+	}
+	.layui-layer-setwin .layui-layer-close2{
+		right: -160px;
+	}
 	.table-info-style {
 		padding: 10px;
 		background-color: #5FB878;
 	}
+	.table-info-style span{
+		color: white;
+		font-family: "Times New Roman";
+	}
 </style>
-<script type="text/javascript">
-	$(function () {
-		$('#show-create-table').on('click',function () {
-			var tableName = $(this).attr('data');
-			var _this = $(this);
-			$.ajax({
-				type : 'get',
-				url : '${basePath}/common/showCreateTable.html',
-				data : {'tableName' : tableName},
-				dataType : 'json',
-				success : function(data){
-//					alert(data);
-//					alert(data);
-					//html = "<div class='alert alert-success'>"+data+"</div>";
-					var html = "<div class='table-info-style'>";
-					for(var i = 0; i < data.length; ++i)
-						html += "<span>"+data[i]+"</span><br>";
-					html += "</div>";
-					//$(".table-info-style").html(html);
-					layer.open({
-						//area : ['600px','800px'],
-						type: 1,
-						shade: false,
-						title: false, //不显示标题
-						content: html, //捕获的元素
-						cancel: function(index){
-							layer.close(index);
-							this.content.show();
-							//layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', {time: 5000, icon:6});
-						}
-					});
-				}
-			});
-		});
-	});
-</script>
-
 <!-- /input-group -->
 <div class="row">
-	<div class="col-sm-9">
+	<div class="col-sm-9" style="clear: both">
 		<div class="input-group" style="margin-bottom:5px;">
 			<div class="input-group-btn">
 				<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					查询条件<span class="caret"></span>
+					查询条件<!--<span class="caret"></span>-->
 				</button>
-				<ul class="dropdown-menu">
+				<!--<ul class="dropdown-menu">
 					<li><a href="#">where</a></li>
 					<li role="separator" class="divider"></li>
 					<li><a href="#">SQL</a></li>
-				</ul>
+				</ul>-->
 			</div>
 			<!-- /btn-group -->
-			<input type="text" class="form-control" aria-label="...">
+			<input type="text" class="form-control" placeholder="select *from tableName where id=? and name=?" name="sql">
 			<span class="input-group-btn">
 				<button class="btn btn-success" type="button">
 					<span class="glyphicon glyphicon-search"></span>
@@ -70,13 +46,13 @@
 		</div>
 	</div>
 	<div class="col-sm-3">
-		<a href="javascript:void" class="btn btn-success" id="show-create-table" data="${tableName}">
+		<a href="javascript:void" class="btn btn-success" id="show-create-table" data-request-url="${basePath}/json/common/showCreateTable.json" data="${tableName}">
 			<span class="glyphicon glyphicon-list"></span>
 			查看表结构
 		</a>
 	</div>
 </div>
-<table class="table table-striped">
+<table class="table table-striped" style="clear: both;">
 	<c:if test="${!records.isEmpty()}">
 		<caption>
 			<h3>
