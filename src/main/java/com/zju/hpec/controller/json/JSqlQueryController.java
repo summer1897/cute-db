@@ -6,6 +6,7 @@ import com.base.pagination.PaginationResult;
 import com.google.common.collect.Maps;
 import com.summer.base.utils.BeanCloneUtils;
 import com.summer.base.utils.PropertyExtractUtils;
+import com.summer.base.utils.StringUtils;
 import com.zju.hpec.controller.view.ResponseView;
 import com.zju.hpec.controller.vo.DBRecordVo;
 import com.zju.hpec.service.ISqlOperationService;
@@ -35,8 +36,18 @@ public class JSqlQueryController {
 
     private Logger LOG = LoggerFactory.getLogger(JSqlQueryController.class);
 
+    private final String FROM = "from";
+
     @Autowired
     private ISqlOperationService sqlOperationService;
+
+    private String getTableNameFromSql(String sql){
+        String tableName = null;
+        if(StringUtils.isNotEmpty(sql)){
+            int index = sql.indexOf(FROM);
+        }
+        return tableName;
+    }
 
     @RequestMapping(value = "/json/sql/query/result.json",method = RequestMethod.GET)
     @ResponseBody
