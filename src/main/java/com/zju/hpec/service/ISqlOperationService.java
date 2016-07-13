@@ -1,18 +1,18 @@
-package com.zju.hpec.dao;
+package com.zju.hpec.service;
 
 import com.base.pagination.PaginationQuery;
 import com.base.pagination.PaginationResult;
-import com.zju.hpec.domain.DBRecord;
+import com.zju.hpec.service.dto.DBRecordDto;
 
 import java.util.List;
 
 /**
- * Created by IntelliJ IDEA
- * Author summer
- * Date 2016/7/12
- * Time 20:16
+ * Created by IntelliJ IDEA.
+ * Author: hzduhao
+ * Date: 2016/7/13
+ * Time: 11:42
  */
-public interface ISqlQueryDao {
+public interface ISqlOperationService {
 
     /**
      * 查询记录数
@@ -24,15 +24,15 @@ public interface ISqlQueryDao {
     /**
      * 执行SQL查询语句，并返回查询结果
      * @param sql SQL语句
-     * @return @{link DBRecord}
+     * @return @{link DBRecordVo}
      */
-    List<DBRecord> sqlQuery(String sql);
+    List<DBRecordDto> sqlQuery(String sql);
 
     /**
      * 执行SQL查询语句，并分页返回SQL查询结果
      * @param sql SQL语句
      * @param paginationQuery
-     * @return @{link DBRecord}
+     * @return @{link DBRecordVo}
      */
-    PaginationResult<DBRecord> sqlQuery(String sql, PaginationQuery paginationQuery);
+    PaginationResult<DBRecordDto> sqlQuery(String sql, PaginationQuery paginationQuery);
 }

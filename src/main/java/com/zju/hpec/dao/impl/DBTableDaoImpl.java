@@ -10,12 +10,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.StatementCallback;
 import org.springframework.stereotype.Repository;
 
 import com.zju.hpec.dao.IDBTableDao;
-import com.zju.hpec.domain.DBField;
 import com.zju.hpec.domain.DBRecord;
 import com.zju.hpec.utils.DBUtils;
 
@@ -29,7 +27,7 @@ import com.zju.hpec.utils.DBUtils;
 @Repository
 public class DBTableDaoImpl implements IDBTableDao {
 
-	private static final Logger LOG = LoggerFactory.getLogger(SqlQueryDaoImpl.class);
+	private static final Logger LOG = LoggerFactory.getLogger(ISqlOperationDao.class);
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 	
