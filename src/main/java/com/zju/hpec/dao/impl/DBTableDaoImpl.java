@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.zju.hpec.controller.Sqls;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -27,6 +29,8 @@ import com.zju.hpec.utils.DBUtils;
 @Repository
 public class DBTableDaoImpl implements IDBTableDao {
 
+	private static final Logger LOG = LoggerFactory.getLogger(SqlQueryDaoImpl.class);
+
 	private static final String TABLE_NAME = "TABLE_NAME";
 	
 	@Autowired
@@ -47,6 +51,7 @@ public class DBTableDaoImpl implements IDBTableDao {
 				tables.add(rs.getString(TABLE_NAME));
 			}
 		} catch (SQLException e) {
+			LOG.error(e.getMessage(),e);
 			e.printStackTrace();
 		}finally {
 			DBUtils.close(null,null,rs);
@@ -57,24 +62,7 @@ public class DBTableDaoImpl implements IDBTableDao {
 	public List<DBRecord> getAllRecords(String tableName) {
 		StringBuilder sql = new StringBuilder("select * from ");
 		sql.append(tableName);
-//		   .append(" order by id");
-		List<DBRecord> records = null;
-		records = jdbcTemplate.query(sql.toString(), new RowMapper<DBRecord>() {
-
-			public DBRecord mapRow(ResultSet rs, int rowNum) throws SQLException {
-				List<DBField> fields = new ArrayList<DBField>();
-				ResultSetMetaData metaData = rs.getMetaData();
-				for(int i = 1; i <= metaData.getColumnCount(); ++i){
-//					System.out.println("metaData: "+metaData);
-//					System.out.println("field value: "+rs.getObject(i));
-					DBField field = new DBField(metaData.getColumnLabel(i),rs.getObject(i));
-					fields.add(field);
-				}
-				return new DBRecord(fields);
-			}
-			
-		});
-		return records;
+		return jdbcTemplate.query(sql.toString(), new RowMapperDBRecord());
 	}
 
 	public List<String> queryTablesMatchesName(String tableName) {
@@ -93,6 +81,7 @@ public class DBTableDaoImpl implements IDBTableDao {
 				tables.add(rs.getString(TABLE_NAME));
 			}
 		}catch(SQLException e){
+			LOG.error(e.getMessage(),e);
 			e.printStackTrace();
 		}finally {
 			DBUtils.close(null,null,rs);
