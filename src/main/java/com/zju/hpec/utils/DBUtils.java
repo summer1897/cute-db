@@ -3,6 +3,7 @@ package com.zju.hpec.utils;
 import java.sql.*;
 
 import com.base.pagination.PaginationQuery;
+import com.summer.base.utils.StringUtils;
 import com.zju.hpec.admin.domain.DBSource;
 import com.zju.hpec.consts.DBType;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -25,13 +26,13 @@ public class DBUtils{
 	public static final String DEFAULT_CHARSET = "UTF-8";
 
 	public static void appendPaginationCondition(StringBuilder sql, PaginationQuery paginationQuery){
-		int index = paginationQuery.getPageIndex();
+		int fromIndex = paginationQuery.getFromIndex();
 		int limit = paginationQuery.getPageSize();
 		String sortedPropertyName = paginationQuery.getSortedPropertyName();
 
-		if(index > 0){
+		if(fromIndex >= 0){
 			sql.append(" limit ")
-			   .append(index);
+			   .append(fromIndex);
 		}
 
 		if(limit > 0){

@@ -21,7 +21,7 @@
 		<dependency>
 			<groupId>com.summer.base.utils</groupId>
 			<artifactId>common-utils</artifactId>
-			<version>1.0-base-utils-SNAPSHOT</version>
+			<version>summer-common-utils-1.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>

@@ -40,7 +40,6 @@ public class ObtainTableInfoTest {
 		String sql = "show create table address";
 		Statement st = con.createStatement();
 		ResultSet rs = st.executeQuery(sql);
-		int count = 0;
 		while(rs.next()){
 //			System.out.println("count :" + (++count));
 			System.out.println(rs.getObject(2));
