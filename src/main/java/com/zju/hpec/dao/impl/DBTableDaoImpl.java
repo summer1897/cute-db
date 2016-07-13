@@ -27,7 +27,7 @@ import com.zju.hpec.utils.DBUtils;
 @Repository
 public class DBTableDaoImpl implements IDBTableDao {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ISqlOperationDao.class);
+	private static final Logger LOG = LoggerFactory.getLogger(DBTableDaoImpl.class);
 
 	private static final String TABLE_NAME = "TABLE_NAME";
 	
