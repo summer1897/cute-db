@@ -10,7 +10,10 @@ import java.io.Serializable;
  */
 public class DBFieldVo implements Serializable {
 
-    /**字段值*/
+   
+	private static final long serialVersionUID = 5099154157520856991L;
+	
+	/**字段值*/
     private Object value;
 
     public DBFieldVo() {}

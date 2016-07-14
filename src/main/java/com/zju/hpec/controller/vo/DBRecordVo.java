@@ -11,7 +11,9 @@ import java.util.List;
  */
 public class DBRecordVo implements Serializable {
 
-    private List<DBFieldVo> dbFieldVoList;
+	private static final long serialVersionUID = 6997089045838128439L;
+	
+	private List<DBFieldVo> dbFieldVoList;
 
     public DBRecordVo(){}
 
