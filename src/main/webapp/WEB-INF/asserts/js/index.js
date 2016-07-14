@@ -51,12 +51,25 @@ $(function(){
                 if(0 == data.code){
                     var _result = data.result;
                     if($(_result).length > 0){
-                        var html = "<table class='table table-striped'><thead><tr>";
+                        var html = "<table class='table table-striped'>";
+
+                        var _table_names = _result.tableNames;
+                        var _table_names_len = $(_table_names).length;
+                        if(_table_names_len > 0){
+                            html += "<caption>";
+                            for(var i = 0; i < _table_names_len; ++i){
+                                html += "<span class='badge' style='margin:0px 5px;'>"+_table_names[i]+"</span>"
+                            }
+                            html += "</caption>";
+                        }
+
+                        html += "<thead><tr>";
+
                         var _fieldNames = _result.fieldNames;
                         var fieldNameLen = $(_fieldNames).length
                         if(fieldNameLen > 0){
                             for(var i = 0; i < fieldNameLen; ++i){
-                                html += "<td align='center'>" + _fieldNames[i] + "</td>";
+                                html += "<td align='center' style='color:green;'>" + _fieldNames[i] + "</td>";
                             }
                             html += "</tr></thead>";
                         }

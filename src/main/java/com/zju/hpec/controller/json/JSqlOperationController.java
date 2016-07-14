@@ -11,6 +11,7 @@ import com.zju.hpec.controller.vo.DBRecordVo;
 import com.zju.hpec.service.ISqlOperationService;
 import com.zju.hpec.service.dto.DBFieldDto;
 import com.zju.hpec.service.dto.DBRecordDto;
+import com.zju.hpec.utils.TableResolveUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,9 +32,9 @@ import java.util.Map;
  * Time: 15:43
  */
 @Controller
-public class JSqlQueryController {
+public class JSqlOperationController {
 
-    private Logger LOG = LoggerFactory.getLogger(JSqlQueryController.class);
+    private Logger LOG = LoggerFactory.getLogger(JSqlOperationController.class);
 
     @Autowired
     private ISqlOperationService sqlOperationService;
@@ -67,6 +68,7 @@ public class JSqlQueryController {
                 if(CollectionUtils.isNotEmpty(fieldNames)){
                     result.put("fieldNames",fieldNames);
                     result.put("dbRecords",dbRecordVoPaginationResult);
+                    result.put("tableNames",TableResolveUtils.getTableNamesFromSqlAsList(sql));
                 }
             }
 
