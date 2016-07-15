@@ -40,4 +40,5 @@
 	overflow-x:scroll;
 	overflow-y:auto;
 	padding-top:60px;
+	min-height: 900px;
 }

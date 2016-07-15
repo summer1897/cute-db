@@ -58,7 +58,7 @@ $(function(){
                         if(_table_names_len > 0){
                             html += "<caption>";
                             for(var i = 0; i < _table_names_len; ++i){
-                                html += "<span class='badge' style='margin:0px 5px;'>"+_table_names[i]+"</span>"
+                                html += "<span class='badge badge-add' style='margin:0px 5px;'>"+_table_names[i]+"</span>"
                             }
                             html += "</caption>";
                         }
