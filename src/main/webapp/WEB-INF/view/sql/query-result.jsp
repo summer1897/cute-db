@@ -13,7 +13,7 @@
         right: -160px;
     }
 </style>
-<table class="table table-striped">
+<table class="table table-striped" id="sql-query-result-table" data-sql="${sql}">
     <c:if test="${!tableNames.isEmpty()}">
         <caption>
             <c:forEach items="${tableNames}" var="tableName">
@@ -32,8 +32,8 @@
                             <td align="center" style="min-width:80px;">
                                 ${fieldName}
                                 <p>
-                                    <span class="glyphicon glyphicon-hand-up cursor"></span>
-                                    <span class="glyphicon glyphicon-hand-down cursor"></span>
+                                    <span class="glyphicon glyphicon-hand-up cursor" data-request-url="${basePath}/json/sql/query/orderedResult.json" data-order="true" data-target="#sql-query-result-table" data-order-name="ASC" data-field-name="${fieldName}"></span>
+                                    <span class="glyphicon glyphicon-hand-down cursor" data-request-url="${basePath}/json/sql/query/orderedResult.json" data-order="true" data-target="#sql-query-result-table" data-order-name="DESC" data-field-name="${fieldName}"></span>
                                 </p>
                             </td>
                         </c:forEach>

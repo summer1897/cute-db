@@ -61,8 +61,9 @@ public class HSqlOperationController {
                 if(CollectionUtils.isNotEmpty(fieldNames)){
                     model.addAttribute("fieldNames",fieldNames);
                     model.addAttribute("dbRecords",dbRecordVoPaginationResult);
-                    model.addAttribute("tableNames",TableResolveUtils.getTableNamesFromSqlAsList(sql));
                 }
+                model.addAttribute("tableNames",TableResolveUtils.getTableNamesFromSqlAsList(sql));
+                model.addAttribute("sql",sql);
             }
         } catch (Exception e) {
             LOG.error(e.getMessage(),e);

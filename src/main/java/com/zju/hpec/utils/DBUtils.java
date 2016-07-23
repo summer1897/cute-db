@@ -30,9 +30,15 @@ public class DBUtils{
 		int limit = paginationQuery.getPageSize();
 		String sortedPropertyName = paginationQuery.getSortedPropertyName();
 
+
+		if(StringUtils.isNotEmpty(sortedPropertyName)){
+			sql.append(" order by ")
+					.append(sortedPropertyName);
+		}
+
 		if(fromIndex >= 0){
 			sql.append(" limit ")
-			   .append(fromIndex);
+					.append(fromIndex);
 		}
 
 		if(limit > 0){
@@ -40,10 +46,6 @@ public class DBUtils{
 			   .append(limit);
 		}
 
-		if(StringUtils.isNotEmpty(sortedPropertyName)){
-			sql.append(" order by ")
-			   .append(sortedPropertyName);
-		}
 	}
 
 	public static void main(String[] args) {

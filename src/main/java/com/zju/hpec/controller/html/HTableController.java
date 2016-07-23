@@ -7,6 +7,7 @@ import com.summer.base.utils.PropertyExtractUtils;
 import com.zju.hpec.controller.vo.DBRecordVo;
 import com.zju.hpec.service.dto.DBFieldDto;
 import com.zju.hpec.service.dto.DBRecordDto;
+import com.zju.hpec.utils.SqlUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,6 +44,8 @@ public class HTableController {
 			model.addAttribute("records", dbRecordVoList);
 		}
 		model.addAttribute("tableName",tableName);
+//		model.addAttribute("sql", SqlUtils.convertAllSpaceInSql("select *from "+tableName));
+		model.addAttribute("sql", "select *from "+tableName);
 		return returnPath;
 	}
 }
