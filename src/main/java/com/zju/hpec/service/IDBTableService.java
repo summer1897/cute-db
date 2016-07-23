@@ -2,7 +2,7 @@ package com.zju.hpec.service;
 
 import java.util.List;
 
-import com.zju.hpec.domain.DBRecord;
+import com.zju.hpec.service.dto.DBRecordDto;
 
 /**
  *
@@ -31,7 +31,7 @@ public interface IDBTableService {
 	 * @param tableName 数据表
 	 * @return 返回tableName数据表中所有数据纪录
 	 */
-	public List<DBRecord> getAllRecords(String tableName);
+	public List<DBRecordDto> getAllRecords(String tableName);
 
 	/**
 	 * 查询数据库中表名包含tableName的所有表,并返回符合条件的所有表名

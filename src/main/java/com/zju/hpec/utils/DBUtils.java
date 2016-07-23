@@ -2,6 +2,8 @@ package com.zju.hpec.utils;
 
 import java.sql.*;
 
+import com.base.pagination.PaginationQuery;
+import com.summer.base.utils.StringUtils;
 import com.zju.hpec.admin.domain.DBSource;
 import com.zju.hpec.consts.DBType;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,6 +24,36 @@ public class DBUtils{
 	private static final String CHARSET = "charset";
 
 	public static final String DEFAULT_CHARSET = "UTF-8";
+
+	public static void appendPaginationCondition(StringBuilder sql, PaginationQuery paginationQuery){
+		int fromIndex = paginationQuery.getFromIndex();
+		int limit = paginationQuery.getPageSize();
+		String sortedPropertyName = paginationQuery.getSortedPropertyName();
+
+
+		if(StringUtils.isNotEmpty(sortedPropertyName)){
+			sql.append(" order by ")
+					.append(sortedPropertyName);
+		}
+
+		if(fromIndex >= 0){
+			sql.append(" limit ")
+					.append(fromIndex);
+		}
+
+		if(limit > 0){
+			sql.append(",")
+			   .append(limit);
+		}
+
+	}
+
+	public static void main(String[] args) {
+		StringBuilder sql = new StringBuilder("select *from user");
+		PaginationQuery paginationQuery = new PaginationQuery(123,1,10,"name");
+		appendPaginationCondition(sql,paginationQuery);
+		System.out.println(sql.toString());
+	}
 	
 	public static String resolveUrl(DBSource dbSource){
 		return DBType.getUrl(dbSource.getDbType())

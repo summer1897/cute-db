@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -17,6 +18,7 @@
 				<jsp:include page="./common/left.jsp"/>
 			</div>
 			<div class="col-md-9 right" id="table-info">
+                <div class="alert alert-warning" role="alert">选择表查看数据!</div>
 			</div>
 		</div>
 	</div>
