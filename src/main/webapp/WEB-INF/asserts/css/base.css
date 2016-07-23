@@ -3,6 +3,9 @@ body{
 	padding:0px;
 	font-family: 微软雅黑;
 }
+a{
+	color: white;
+}
 a:hover {
 	text-decoration: none;
 }
@@ -51,6 +54,10 @@ a:hover {
 .border-e5{
 	border:1px solid #e5e5e5;
 }
+.badge-warning{
+	padding: 6px 10px;
+	background-color: #eea236;
+}
 .no-border{
 	border:0px;
 }
@@ -68,4 +75,10 @@ a:hover {
 }
 .no-radius{
 	border-radius:0px;
+}
+.cursor{
+	cursor: pointer;
+}
+.no-cursor{
+	cursor: none;
 }

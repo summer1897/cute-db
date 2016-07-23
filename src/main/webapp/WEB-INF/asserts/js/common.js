@@ -67,8 +67,15 @@ $(function() {
 
     $(document).on('click',"a[data-asyn-load='true']",function(){
         var paramStr = resolveParams($(this).attr("data-params"));
-        var requestURL  = $(this).attr("data-request-url") + paramStr;
-        // alert(requestURL);
+        // encodeURIComponent(paramStr);
+        // alert(paramStr);
+        //转义空格字符
+        paramStr = paramStr.replace(/\s/g,"%20");
+        var requestURL  = $(this).attr("data-request-url");
+        if(isNotEmpty(paramStr)){
+            requestURL += "?" + paramStr;
+        }
+         // alert(requestURL);
         //alert(normalizeTarget($(this).attr("target")));
         $(normalizeTarget($(this).attr("target"))).load(requestURL);
     });

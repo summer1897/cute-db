@@ -30,17 +30,17 @@ public class AdminController {
 
 	@RequestMapping("/admin/{viewName}")
 	public String dispatcher(@PathVariable String viewName){
-		return "/admin/"+viewName;
+		return "admin/"+viewName;
 	}
 	
 	@RequestMapping("/admin/dbsource/{viewName}")
 	public String dbsourceDispatcher(@PathVariable String viewName){
-		return "/admin/"+viewName;
+		return "admin/"+viewName;
 	}
 	
 	@RequestMapping("/admin.html")
 	public String admin(HttpServletRequest request){
-		return "/admin/admin";
+		return "admin/admin";
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/admin/settings.html")
 	public String basicSettings(){
-		return "/admin/basic-settings";
+		return "admin/basic-settings";
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/admin/dbsource.html")
 	public String showAllDbSource(){
-		return "/admin/datasource";
+		return "admin/datasource";
 	}
 	
 	/**
@@ -67,7 +67,7 @@ public class AdminController {
 	 */
 	@RequestMapping("/admin/dbsource/settings.html")
 	public String dbSourceSettings(){
-		return "/admin/dbsource-settings";
+		return "admin/dbsource-settings";
 	}
 	
 	/**
@@ -78,7 +78,7 @@ public class AdminController {
 	@RequestMapping("/admin/dbsource/addHandler.html")
 	public String addDBSource(DBSource dbSource){
 //		System.out.println(dbSource.getDbType());
-		return "/admin/add";
+		return "admin/add";
 	}
 	
 	@RequestMapping("/admin/dbsource/canConnect.html")
