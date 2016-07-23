@@ -6,11 +6,13 @@ import com.base.pagination.PaginationResult;
 import com.google.common.collect.Maps;
 import com.summer.base.utils.BeanCloneUtils;
 import com.summer.base.utils.PropertyExtractUtils;
+import com.summer.base.utils.StringUtils;
 import com.zju.hpec.controller.view.ResponseView;
 import com.zju.hpec.controller.vo.DBRecordVo;
 import com.zju.hpec.service.ISqlOperationService;
 import com.zju.hpec.service.dto.DBFieldDto;
 import com.zju.hpec.service.dto.DBRecordDto;
+import com.zju.hpec.utils.SqlUtils;
 import com.zju.hpec.utils.TableResolveUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.slf4j.Logger;
@@ -43,7 +45,7 @@ public class JSqlOperationController {
     @ResponseBody
     public ResponseView sqlQuery(@RequestParam String sql,
                                  @RequestParam(required = false,defaultValue = "1") int pageIndex,
-                                 @RequestParam(required = false,defaultValue = "1") int pageSize){
+                                 @RequestParam(required = false,defaultValue = "10") int pageSize){
         ResponseView responseView = new ResponseView();
         try{
 
@@ -74,6 +76,44 @@ public class JSqlOperationController {
 
 //            responseView.setResult(result);
         }catch (Exception e){
+            responseView.setCode(ResponseView.EXCEPTION_TOAST_SHOW);
+            responseView.setMessage("SQL语句查询出错!");
+            LOG.error(e.getMessage(),e);
+            e.printStackTrace();
+        }
+        return responseView;
+    }
+
+    @RequestMapping(value = "/json/sql/query/orderedResult.json",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseView sqlOrder(@RequestParam String sql,
+                                 @RequestParam String field,
+                                 @RequestParam(required = false,defaultValue = "ASC") String order,
+                                 @RequestParam(required = false,defaultValue = "1") int pageIndex,
+                                 @RequestParam(required = false,defaultValue = "10") int pageSize){
+        ResponseView responseView = new ResponseView();
+        try {
+            System.out.println("sql: "+sql);
+            StringBuilder orderProperty = new StringBuilder(field);
+            if(StringUtils.isNotEmpty(order)){
+                orderProperty.append(" ").append(order);
+            }
+
+            PaginationQuery paginationQuery = new PaginationQuery(pageIndex,pageSize);
+            paginationQuery.setSortedPropertyName(orderProperty.toString());
+
+            PaginationResult<DBRecordDto> dbRecordDtoPaginationResult = sqlOperationService.sqlQuery(sql,paginationQuery);
+            List<DBRecordDto> dbRecordDtoList = dbRecordDtoPaginationResult.getResult();
+
+            PaginationResult<DBRecordVo> dbRecordVoPaginationResult = new PaginationResult<DBRecordVo>();
+            dbRecordVoPaginationResult.setQuery(dbRecordDtoPaginationResult.getQuery());
+            if(CollectionUtils.isNotEmpty(dbRecordDtoList)){
+                List<DBRecordVo> dbRecordVoList = BeanCloneUtils.deepClone(dbRecordDtoList,DBRecordDto.class,DBRecordVo.class);
+                dbRecordVoPaginationResult.setResult(dbRecordVoList);
+            }
+            responseView.setResult(dbRecordVoPaginationResult);
+            System.out.println(JSON.toJSONString(responseView,true));
+        } catch (Exception e) {
             responseView.setCode(ResponseView.EXCEPTION_TOAST_SHOW);
             responseView.setMessage("SQL语句查询出错!");
             LOG.error(e.getMessage(),e);

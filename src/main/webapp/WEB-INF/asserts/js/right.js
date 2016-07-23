@@ -34,6 +34,46 @@ $(function(){
     });
 
     /**
+     * SQL查询排序
+     */
+    $("span[data-order='true']").on('click',function(){
+        var _this = $(this);
+        var _target = _this.attr("data-target");
+        var _sql = $(_target).attr("data-sql");
+        var _field = _this.attr("data-field-name");
+        var _order = _this.attr("data-order-name");
+        var _requestURL = _this.attr("data-request-url");
+        $.ajax({
+            type : 'get',
+            url : _requestURL,
+            data : {'sql' : _sql,'field' : _field,'order' : _order},
+            dataType : 'json',
+            success : function(data){
+                var html = "";
+                var _result = data.result.result;
+                var _result_len = $(_result).length;
+                if(_result_len > 0){
+                    for(var i = 0; i < _result_len; ++i){
+                        html += "<tr>";
+                        var _db_fields = _result[i].dbFieldVoList;
+                        var _db_fields_len = $(_db_fields).length;
+                        if(_db_fields_len > 0){
+                            for(var j = 0; j < _db_fields_len; ++j){
+                                html += "<td align='center'>" +
+                                    _db_fields[j].value + "</td>";
+                            }
+                        }
+
+                        html += "</tr>";
+                    }
+                }
+//					alert(html);
+                $(_target).find("tbody").html(html);
+            }
+        });
+    });
+
+    /**
      * SQL查询异步请求处理
      */
     $('#sql-query-btn').on('click',function(){
