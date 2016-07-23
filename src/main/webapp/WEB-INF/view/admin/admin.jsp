@@ -38,7 +38,7 @@
 	<jsp:include page="../common/header.jsp"/>
 	<div class="container margin-left-clear margin-top-clear padding-left-clear width-all padding-right-clear padding-bottom-clear margin-bottom-clear">
 		<div class="row margin-left-clear margin-right-clear padding-right-clear">
-			<div class="col-md-2 left margin-left-clear padding-left-clear padding-right-clear ">
+			<div class="col-md-2 left margin-left-clear padding-left-clear padding-right-clear " style="margin-top: 60px;">
 				<jsp:include page="./aside-menu.jsp"/>
 			</div>
 			<div class="col-md-10 right" id="admin-content" style="padding-left:30px;padding-right:30px;">

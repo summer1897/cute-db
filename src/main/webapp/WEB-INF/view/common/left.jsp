@@ -13,7 +13,7 @@
 	<ul class="aside-menu" id="tables-list">
 		<c:forEach items="${tables}" var="table">
 			<li class="list-item">
-				<a href="javascript:void;" data-request-url="${basePath}/common/right.html?tableName=${table}" data-asyn-load="true" target="#table-info">${table}</a>
+				<a href="javascript:void(0);" data-request-url="${basePath}/common/right.html?tableName=${table}" data-asyn-load="true" target="#table-info">${table}</a>
 			</li>
 		</c:forEach>
 	</ul>
